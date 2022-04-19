@@ -2,7 +2,6 @@ defmodule ExMon do
   alias ExMon.{Jogo, Jogador}
   alias ExMon.Jogo.{Acoes, Status}
 
-
   @nome_computador "Robo"
 
   def criar_jogador(nome, chute, soco, curar) do
@@ -23,7 +22,7 @@ defmodule ExMon do
     |> criar_jogador(:chute, :soco, :curar)
     |> Jogo.inicio(jogador)
 
-    Status.mensagem_da_rodada()
+    Status.mensagem_da_rodada(Jogo.info())
   end
 
   def movimentos(movimento) do
@@ -32,12 +31,14 @@ defmodule ExMon do
     |> lutando()
   end
 
-  defp lutando({:error, movimento}),  do: Status.mensagem_movimento_errado(movimento)
+  defp lutando({:error, movimento}), do: Status.mensagem_movimento_errado(movimento)
 
   defp lutando({:ok, movimento}) do
     case movimento do
       :curar -> "realiza_cura"
       movimento -> Acoes.atacar(movimento)
     end
+
+    Status.mensagem_da_rodada(Jogo.info())
   end
 end
