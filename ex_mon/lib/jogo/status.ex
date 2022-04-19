@@ -1,5 +1,4 @@
 defmodule ExMon.Jogo.Status do
-
   def mensagem_da_rodada(%{status: :iniciado} = info) do
     IO.puts("\n==== O JOGO FOI INICIADO ====\n")
     IO.inspect(info)
@@ -7,7 +6,7 @@ defmodule ExMon.Jogo.Status do
   end
 
   def mensagem_da_rodada(%{status: :continue, turno: jogador} = info) do
-    IO.puts("\n==== É a vez do #{jogador}. ====\n")
+    IO.puts("\n==== É A VEZ DO #{jogador}. ====\n")
     IO.inspect(info)
     IO.puts("-----------------------------------")
   end
@@ -23,10 +22,14 @@ defmodule ExMon.Jogo.Status do
   end
 
   def mensagem_movimento(:computador, :movimento, dano) do
-    IO.puts("\n==== O jogador atacou o Robo dando #{dano} de dano. ====\n")
+    IO.puts("\n==== O JOGADOR atacou o ROBO dando #{dano} de dano. ====\n")
   end
 
   def mensagem_movimento(:jogador, :movimento, dano) do
-    IO.puts("\n==== O Robo atacou o jogador dando #{dano} de dano. ====\n")
+    IO.puts("\n==== O ROBO atacou o JOGADOR dando #{dano} de dano. ====\n")
+  end
+
+  def mensagem_movimento(jogador, :curar, vida) do
+    IO.puts("\n==== O #{jogador} se RECUPEROU, e foi para #{vida} de vida. ====\n")
   end
 end
