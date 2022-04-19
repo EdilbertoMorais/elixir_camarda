@@ -1,11 +1,18 @@
 defmodule ExMon.Jogo.Acoes do
   alias ExMon.Jogo
-  alias ExMon.Jogo.Acao.Ataque
+  alias ExMon.Jogo.Acao.{Ataque, Curar}
 
   def atacar(movimento) do
     case Jogo.turno() do
       :jogador -> Ataque.ataque_oponente(:computador, movimento)
       :computador -> Ataque.ataque_oponente(:jogador, movimento)
+    end
+  end
+
+  def curar() do
+    case Jogo.turno() do
+      :jogador -> Curar.curar_vida(:jogador)
+      :computador -> Curar.curar_vida(:computador)
     end
   end
 

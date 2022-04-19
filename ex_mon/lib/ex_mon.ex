@@ -35,7 +35,7 @@ defmodule ExMon do
 
   defp lutando({:ok, movimento}) do
     case movimento do
-      :curar -> "realiza_cura"
+      :curar -> Acoes.curar()
       movimento -> Acoes.atacar(movimento)
     end
 
