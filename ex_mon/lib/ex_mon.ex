@@ -2,6 +2,8 @@ defmodule ExMon do
   alias ExMon.{Jogo, Jogador}
   alias ExMon.Jogo.{Acoes, Status}
 
+  @ataque_computador [:chute, :soco, :curar]
+
   @nome_computador "Robo"
 
   def criar_jogador(nome, chute, soco, curar) do
@@ -26,9 +28,19 @@ defmodule ExMon do
   end
 
   def movimentos(movimento) do
+    Jogo.info()
+    |> Map.get(:status)
+    |> tratar_status(movimento)
+  end
+
+  defp tratar_status(:fim_do_jogo, _movimento), do: Status.mensagem_da_rodada(Jogo.info())
+
+  defp tratar_status(_outro, movimento) do
     movimento
     |> Acoes.buscar_movimentos()
     |> lutando()
+
+    movimento_computador(Jogo.info())
   end
 
   defp lutando({:error, movimento}), do: Status.mensagem_movimento_errado(movimento)
@@ -41,4 +53,11 @@ defmodule ExMon do
 
     Status.mensagem_da_rodada(Jogo.info())
   end
+
+  defp movimento_computador(%{turno: :computador, status: :continue}) do
+    movimento = {:ok, Enum.random(@ataque_computador)}
+    lutando(movimento)
+  end
+
+  defp movimento_computador(_), do: :ok
 end
