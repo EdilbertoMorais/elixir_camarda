@@ -22,7 +22,7 @@ defmodule ExMon.Jogo do
   end
 
   def jogador, do: Map.get(info(), :jogador)
-  ExM
+
   def buscar_jogador(jogador), do: Map.get(info(), jogador)
 
   defp atualizar_estado_jogo(
