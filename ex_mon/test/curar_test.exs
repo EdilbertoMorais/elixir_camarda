@@ -3,13 +3,20 @@ defmodule ExMon.Jogo.Acao.CurarTest do
 
   import ExUnit.CaptureIO
 
+  alias ExMon.Jogo
+
   describe "curar_vida/1" do
     setup do
       jogador = ExMon.criar_jogador("Edil", :chute, :soco, :curar)
+      computador = ExMon.criar_jogador("Robo", :chute, :soco, :curar)
 
-      capture_io(fn ->
-        ExMon.inicio_jogo(jogador)
-      end)
+      Jogo.inicio(computador, jogador)
+      # jogador = ExMon.criar_jogador("Edil", :chute, :soco, :curar)
+      # ExMon.inicio_jogo(jogador)
+
+      if Jogo.info().turno == :computador do
+        Jogo.atualizar(Jogo.info())
+      end
 
       :ok
     end

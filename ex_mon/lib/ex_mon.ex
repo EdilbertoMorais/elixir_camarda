@@ -25,6 +25,8 @@ defmodule ExMon do
     |> Jogo.inicio(jogador)
 
     Status.mensagem_da_rodada(Jogo.info())
+
+    movimento_computador(Jogo.info())
   end
 
   def movimentos(movimento) do
@@ -52,6 +54,18 @@ defmodule ExMon do
     end
 
     Status.mensagem_da_rodada(Jogo.info())
+  end
+
+  defp movimento_computador(%{turno: :computador, status: :iniciado}) do
+    movimento = {:ok, Enum.random([:chute, :soco])}
+    lutando(movimento)
+  end
+
+  # verificar se temos outra forma de priorizar o movimento de curar
+  defp movimento_computador(%{turno: :computador, vida: vida_computador})
+       when vida_computador <= 40 do
+    movimento = {:ok, Enum.random([:chute, :soco, :curar, :curar])}
+    lutando(movimento)
   end
 
   defp movimento_computador(%{turno: :computador, status: :continue}) do
