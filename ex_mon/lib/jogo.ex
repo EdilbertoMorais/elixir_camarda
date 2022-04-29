@@ -6,7 +6,7 @@ defmodule ExMon.Jogo do
     valor_inicial = %{
       computador: computador,
       jogador: jogador,
-      turno: :jogador,
+      turno: Enum.random([:computador, :jogador]),
       status: :iniciado
     }
 
@@ -25,7 +25,7 @@ defmodule ExMon.Jogo do
 
   def buscar_jogador(jogador), do: Map.get(info(), jogador)
 
-  def turno, do: Map.get(info(), :turno)
+  def turno(), do: Map.get(info(), :turno)
 
   defp atualizar_estado_jogo(
          %{jogador: %Jogador{vida: vida_jogador}, computador: %Jogador{vida: vida_computador}} =

@@ -4,6 +4,8 @@ defmodule ExMonTest do
   import ExUnit.CaptureIO
 
   alias ExMon.Jogador
+  alias ExMon.Jogo
+  alias ExMon
 
   describe "criar_jogador/4" do
     test "retorna um jogador" do
@@ -35,7 +37,6 @@ defmodule ExMonTest do
       # o teste já sera aprovado
       assert mensagens =~ "O JOGO FOI INICIADO"
       assert mensagens =~ "status: :iniciado"
-      assert mensagens =~ "turno: :jogador"
       # Usamos a variável (mensagens) acima para fazer o assert e chegarmos ao resultado esperado
     end
   end
@@ -46,6 +47,10 @@ defmodule ExMonTest do
 
       capture_io(fn ->
         ExMon.inicio_jogo(jogador)
+
+        if Jogo.info().turno == :computador do
+          Jogo.atualizar(Jogo.info())
+        end
       end)
 
       :ok
@@ -57,7 +62,6 @@ defmodule ExMonTest do
           ExMon.movimentos(:chute)
         end)
 
-      assert mensagens =~ "O JOGADOR atacou o ROBO"
       assert mensagens =~ "É A VEZ DO computador"
       assert mensagens =~ "status: :continue"
     end

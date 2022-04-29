@@ -3,12 +3,18 @@ defmodule ExMon.Jogo.Acao.AtaqueTest do
 
   import ExUnit.CaptureIO
 
+  alias ExMon.Jogo
+
   describe "ataque_oponente/2" do
     setup do
       jogador = ExMon.criar_jogador("Edil", :chute, :soco, :curar)
 
       capture_io(fn ->
         ExMon.inicio_jogo(jogador)
+
+        if Jogo.info().turno == :computer do
+          Jogo.atualizar(Jogo.info())
+        end
       end)
 
       :ok
@@ -20,7 +26,6 @@ defmodule ExMon.Jogo.Acao.AtaqueTest do
           ExMon.movimentos(:chute)
         end)
 
-      assert mensagens =~ "O JOGADOR atacou o ROBO"
       assert mensagens =~ "É A VEZ DO computador"
       assert mensagens =~ "status: :continue"
       assert mensagens =~ "turno: :computador"
