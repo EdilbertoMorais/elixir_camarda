@@ -22,8 +22,10 @@ defmodule ExMon.Jogo do
   end
 
   def jogador, do: Map.get(info(), :jogador)
-  ExM
+
   def buscar_jogador(jogador), do: Map.get(info(), jogador)
+
+  def turno, do: Map.get(info(), :turno)
 
   defp atualizar_estado_jogo(
          %{jogador: %Jogador{vida: vida_jogador}, computador: %Jogador{vida: vida_computador}} =
