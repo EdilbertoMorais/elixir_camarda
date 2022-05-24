@@ -42,5 +42,7 @@ defmodule ExMonWeb.Router do
     pipe_through :api
 
     get "/", WelcomeController, :index
+    resources "/trainers", TrainersController, only: [:create, :show, :delete, :update]
+    #only defini quais rotas vc quer criar, pode se escolher a quantidade desejada
   end
 end

@@ -13,6 +13,13 @@ defmodule ExMon.Trainer do
   end
 
   @requerid_params [:name, :password]
+
+  def build(params) do
+    params
+    |> changeset()
+    |> apply_action(:insert)
+  end
+
   def changeset(params) do
     %__MODULE__{}
     |> cast(params, @requerid_params)
@@ -26,5 +33,4 @@ defmodule ExMon.Trainer do
   end
 
   defp put_pass_hash(changeset), do: changeset
-
 end
