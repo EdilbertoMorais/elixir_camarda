@@ -18,7 +18,7 @@ defmodule ExMonWeb.TrainersController do
   def show(conn, %{"id" => id}) do
     id
     |> ExMon.fecth_trainer()
-    |> handle_response(conn, "show.json", :ok )
+    |> handle_response(conn, "show.json", :ok)
   end
 
   defp handle_delete({:ok, _trainer}, conn) do
