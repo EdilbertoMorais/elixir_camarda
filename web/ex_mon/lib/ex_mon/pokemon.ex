@@ -3,6 +3,7 @@ defmodule ExMon.Pokemon do
 
   @enforce_keys @keys
 
+  @derive Jason.Encoder
   defstruct @keys
 
   def build(%{"id" => id, "name" => name, "weight" => weight, "types" => types}) do
@@ -14,6 +15,5 @@ defmodule ExMon.Pokemon do
     }
   end
 
-  defp parse_types(types), do: Enum.map(types, fn item -> item["type"]["name"]end)
-
+  defp parse_types(types), do: Enum.map(types, fn item -> item["type"]["name"] end)
 end
