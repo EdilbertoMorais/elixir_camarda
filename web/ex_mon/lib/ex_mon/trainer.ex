@@ -3,12 +3,18 @@ defmodule ExMon.Trainer do
 
   import Ecto.Changeset
 
+  alias ExMon.Trainer.Pokemon
+
   @primary_key {:id, Ecto.UUID, autogenerate: true}
 
   schema "trainers" do
     field :name, :string
     field :password_hash, :string
     field :password, :string, virtual: true
+    has_many(:pokemon, Pokemon)
+
+    # usa-se o has_many, para informar que o relacionamento é um para varios, neste caso um trainer
+    # para varios pokemons (1 arg o nome do schema, 2 arg o modulo ExMon.Trainer.Pokemon)
     timestamps()
   end
 
