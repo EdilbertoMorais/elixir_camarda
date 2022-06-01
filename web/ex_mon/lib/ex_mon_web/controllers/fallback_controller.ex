@@ -7,4 +7,11 @@ defmodule ExMonWeb.FallbackController do
     |> put_view(ExMonWeb.ErrorView)
     |> render("400.json", result: result)
   end
+
+  def call(conn, {:error, message, 404}) do
+    conn
+    |> put_status(404)
+    |> put_view(ExMonWeb.ErrorView)
+    |> render("404.json", message: message)
+  end
 end

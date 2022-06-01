@@ -10,6 +10,8 @@ defmodule ExMonWeb.Router do
     resources "/trainers", TrainersController, only: [:create, :show, :delete, :update]
     # only defini quais rotas vc quer criar, pode se escolher a quantidade desejada
     get "/pokemons/:name", PokemonsController, :show
+
+    # neste caso nao foi usado o resources para criar a rota show, criamos apenas o get com a action show
   end
 
   # Enables LiveDashboard only for development
