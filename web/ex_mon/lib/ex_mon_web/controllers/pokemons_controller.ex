@@ -15,5 +15,8 @@ defmodule ExMonWeb.PokemonsController do
     |> json(pokemon)
   end
 
+  defp handle_response({:error, "Pokemon not found!" = message}, _conn),
+    do: {:error, message, 404}
+
   defp handle_response({:error, _reason} = error, _conn), do: error
 end
