@@ -14,7 +14,9 @@ defmodule ExMonWeb.TrainersView do
     }
   end
 
-  def render("show.json", %{trainer: %Trainer{id: id, name: name, inserted_at: inserted_at, pokemon: pokemon}}) do
+  def render("show.json", %{
+        trainer: %Trainer{id: id, name: name, inserted_at: inserted_at, pokemon: pokemon}
+      }) do
     %{
       id: id,
       name: name,
@@ -24,7 +26,13 @@ defmodule ExMonWeb.TrainersView do
   end
 
   def render("update.json", %{
-        trainer: %Trainer{id: id, name: name, inserted_at: inserted_at, updated_at: updated_at, pokemon: pokemon}
+        trainer: %Trainer{
+          id: id,
+          name: name,
+          inserted_at: inserted_at,
+          updated_at: updated_at,
+          pokemon: pokemon
+        }
       }) do
     %{
       message: "Trainer updated!",
