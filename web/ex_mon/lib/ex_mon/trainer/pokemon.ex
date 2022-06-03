@@ -35,4 +35,11 @@ defmodule ExMon.Trainer.Pokemon do
     # o assoc_constraint ele verifica no changeset quando executamos uma ação no banco que o trainer_id que estamos passando existe
     |> validate_length(:nickname, min: 2)
   end
+
+  def update_changeset(pokemon, params) do
+    pokemon
+    |> cast(params, [:nickname])
+    |> validate_required([:nickname])
+    |> validate_length(:nickname, min: 2)
+  end
 end
