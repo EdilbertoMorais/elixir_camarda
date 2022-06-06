@@ -52,3 +52,7 @@ config :phoenix, :json_library, Jason
 import_config "#{config_env()}.exs"
 
 config :esbuild, version: "0.14.29"
+
+config :ex_mon, ExMonWeb.Auth.Guardiann,
+  issuer: "ex_mon",
+  secret_key: "w92xmYRZUGTD8JxDWj3tbbUVYtHKFQLRkZORWQQ28tIp4AB/upnXC+h5ccLA30Y5"
