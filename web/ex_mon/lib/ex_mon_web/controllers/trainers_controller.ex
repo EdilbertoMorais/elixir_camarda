@@ -26,6 +26,14 @@ defmodule ExMonWeb.TrainersController do
     |> handle_response(conn, "show.json", :ok)
   end
 
+  # def show_all(conn, _params) do
+  #   trainers = ExMon.Repo.all(ExMon.Trainer)
+
+  #   conn
+  #   |> put_status(200)
+  #   |> render("show_all.json", trainers: trainers)
+  # end
+
   def update(conn, params) do
     params
     |> ExMon.update_trainer()
