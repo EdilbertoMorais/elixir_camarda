@@ -56,3 +56,7 @@ config :esbuild, version: "0.14.29"
 config :ex_mon, ExMonWeb.Auth.Guardian,
   issuer: "ex_mon",
   secret_key: "w92xmYRZUGTD8JxDWj3tbbUVYtHKFQLRkZORWQQ28tIp4AB/upnXC+h5ccLA30Y5"
+
+config :ex_mon, ExMonWeb.Auth.Pipeline,
+  module: ExMonWeb.Auth.Guardian,
+  error_handler: ExMonWeb.Auth.ErrorHandler
