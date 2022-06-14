@@ -27,6 +27,10 @@ defmodule ExMonWeb.ErrorView do
     %{message: message}
   end
 
+  def render("401.json", %{message: message}) do
+    %{message: message}
+  end
+
   def render("404.json", %{message: message}) do
     %{message: message}
   end

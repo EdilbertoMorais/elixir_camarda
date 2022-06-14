@@ -5,19 +5,30 @@ defmodule ExMonWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug ExMonWeb.Auth.Pipeline
+  end
+
   scope "/api", ExMonWeb do
     pipe_through :api
-    resources "/trainers", TrainersController, only: [:create, :show, :delete, :update]
-    # only defini quais rotas vc quer criar, pode se escolher a quantidade desejada
-    resources "/trainer_pokemons", TrainerPokemonsController,
-      only: [:create, :show, :delete, :update]
+    post "/trainers", TrainersController, :create
+    # criação de Trainer
 
     post "/trainers/signin", TrainersController, :sign_in
+    # login de Trainer
 
     get "/pokemons/:name", PokemonsController, :show
-    # get "/trainers/all", TrainersController, :show_all
+    # ler informações de um pokemon qualquer (pokemon da poke_api)
+  end
 
-    # neste caso nao foi usado o resources para criar a rota show, criamos apenas o get com a action show
+  # rotas autenticadas abaixo
+  scope "/api", ExMonWeb do
+    pipe_through [:api, :auth]
+    # todas as ações do trainer, exeto a create, serão autenticadas
+    resources "/trainers", TrainersController, only: [:show, :delete, :update]
+    # todas as ações do pokemon, serão autenticadas
+    resources "/trainer_pokemons", TrainerPokemonsController,
+      only: [:create, :show, :delete, :update]
   end
 
   # Enables LiveDashboard only for development
