@@ -14,6 +14,14 @@ defmodule ExMonWeb.TrainersController do
     end
   end
 
+  def sign_in(conn, params) do
+    with {:ok, token} <- Guardian.authenticate(params) do
+      conn
+      |> put_status(:ok)
+      |> render("sign_in.json", token: token)
+    end
+  end
+
   def delete(conn, %{"id" => id}) do
     id
     |> ExMon.delete_trainer()
@@ -25,6 +33,14 @@ defmodule ExMonWeb.TrainersController do
     |> ExMon.fecth_trainer()
     |> handle_response(conn, "show.json", :ok)
   end
+
+  # def show_all(conn, _params) do
+  #   trainers = ExMon.Repo.all(ExMon.Trainer)
+
+  #   conn
+  #   |> put_status(200)
+  #   |> render("show_all.json", trainers: trainers)
+  # end
 
   def update(conn, params) do
     params

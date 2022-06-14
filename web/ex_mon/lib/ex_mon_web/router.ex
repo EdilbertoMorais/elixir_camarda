@@ -12,7 +12,10 @@ defmodule ExMonWeb.Router do
     resources "/trainer_pokemons", TrainerPokemonsController,
       only: [:create, :show, :delete, :update]
 
+    post "/trainers/signin", TrainersController, :sign_in
+
     get "/pokemons/:name", PokemonsController, :show
+    # get "/trainers/all", TrainersController, :show_all
 
     # neste caso nao foi usado o resources para criar a rota show, criamos apenas o get com a action show
   end
