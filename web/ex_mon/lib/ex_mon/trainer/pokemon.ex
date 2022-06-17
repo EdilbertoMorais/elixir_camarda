@@ -32,7 +32,7 @@ defmodule ExMon.Trainer.Pokemon do
     |> cast(params, @required)
     |> validate_required(@required)
     |> assoc_constraint(:trainer)
-    # o assoc_constraint ele verifica no changeset quando executamos uma ação no banco que o trainer_id que estamos passando existe
+    # o assoc_constraint confirma no changeset quando executamos uma ação no banco que o trainer_id que estamos passando existe
     |> validate_length(:nickname, min: 2)
   end
 
